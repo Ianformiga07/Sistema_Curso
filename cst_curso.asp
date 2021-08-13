@@ -2,7 +2,7 @@
 <!--#include file ="lib/Conexao.asp"-->
 <%
 call abreConexao
-sql = "SELECT AU_Curso.id_Curso, AU_Curso.descricao, AU_Professor.Nome, AU_Curso.resumo, AU_Curso.ativo from AU_Professor INNER JOIN AU_Curso on AU_Curso.id_professor = AU_Professor.id_professor order by AU_Curso.id_Curso "
+sql = "SELECT AU_Curso.id_Curso, AU_Curso.descricao, AU_Professor.Nome as Nome_Professor, AU_Curso.resumo, AU_Curso.ativo from AU_Professor INNER JOIN AU_Curso on AU_Curso.id_professor = AU_Professor.id_professor order by AU_Curso.id_Curso "
 set rs = conn.execute(sql)
 
 %>
@@ -46,7 +46,7 @@ do while not rs.eof%>
         </a>		
 		</td>
         <td><%=rs("descricao")%></td>
-        <td><%=rs("Nome")%></td>
+        <td><%=rs("Nome_Professor")%></td>
         <td><%=rs("resumo")%></td>
         <td><%IF rs("ativo") = TRUE THEN%>
                           <font color="#009933"> ATIVO </font>

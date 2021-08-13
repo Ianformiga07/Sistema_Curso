@@ -14,14 +14,14 @@ if ucase(evt) = "ALT" then
    sql = "SELECT * from AU_Curso where id_Curso = "&cod
 
    set rs = conn.execute(sql)
-Nome         =  rs("descricao")
+nomeCurso    =  rs("descricao")
 Ativo        =  rs("ativo")
 Resumo       =  rs("Resumo")
 Professor    =  rs("id_professor")
 
    bot        = "Alterar"
 else
-   Ativo = 0
+   ativo = 0
    bot       = "Incluir"
 end if
 call fechaConexao
@@ -29,12 +29,12 @@ call fechaConexao
 
 <div class="container">
 <br><br>
-  <form class="form-horizontal" name="frm_Professor" action="manu_professor.asp" method="post">
+  <form class="form-horizontal" name="frm_Curso" action="manu_curso.asp" method="post">
 
     <div class="form-group">
-      <label class="control-label col-sm-2" for="nome"><b>Nome do Curso:</b></label>
+      <label class="control-label col-sm-2" for="nomeCurso"><b>Nome do Curso:</b></label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="nome" name="nome" value="<%=Nome%>">
+        <input type="text" class="form-control" id="nomeCurso" name="nomeCurso" value="<%=nomeCurso%>">
       </div>
     </div>
 	<%
@@ -45,8 +45,7 @@ call fechaConexao
     <div class="form-group">
       <label class="control-label col-sm-2" for="Professor"><b>Professor:</b></label>
       <div class="col-sm-4">
-        <select class="form-control" name="profissional">
-        	<option>Selecionar</option>
+        <select class="form-control" name="Professor">
 			<%do while not rs.eof%>
         	<option value="<%=rs("id_professor")%>"><%=rs("Nome")%></option>
             <%
@@ -58,10 +57,10 @@ call fechaConexao
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="Ativo"><b>Ativo:</b></label>
+      <label class="control-label col-sm-2" for="ativo"><b>Ativo:</b></label>
       <div class="col-sm-4">
-        <select class="form-control" name="Ativo">
-        	<%if cint(Ativo) then%>
+        <select class="form-control" name="ativo">
+        	<%if cint(ativo) = 1 then%>
         	<option value="1"> Ativo </option>
 			<option value="0"> Inativo </option>
             <%else%>
