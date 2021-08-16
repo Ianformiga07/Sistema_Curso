@@ -29,7 +29,7 @@ call fechaConexao
 
 <div class="container">
 <br><br>
-  <form class="form-horizontal" name="frm_Modulo" action="manu_modulo.asp" method="post">
+  <form class="form-horizontal" name="frm_Modulo" action="manu_modulo_up.asp" method="post">
 
     <div class="form-group">
       <label class="control-label col-sm-2" for="nomeModulo"><b>Descrição Módulo:</b></label>
