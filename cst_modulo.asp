@@ -2,7 +2,7 @@
 <!--#include file ="lib/Conexao.asp"-->
 <%
 call abreConexao
-sql = "select AU_Modulo.id_modulo, AU_Modulo.descricao AS NomeModulo, AU_Modulo.Texto, AU_Modulo.anexo from AU_Modulo INNER JOIN AU_Curso ON AU_Curso.id_Curso = AU_Modulo.id_curso INNER JOIN AU_Professor ON AU_Professor.id_professor = AU_Curso.id_professor order by AU_Modulo.id_modulo "
+sql = "select AU_Modulo.id_modulo, AU_Modulo.descricao AS NomeModulo, AU_Curso.descricao as NomeCurso, AU_Modulo.Texto, AU_Modulo.anexo from AU_Modulo INNER JOIN AU_Curso ON AU_Curso.id_Curso = AU_Modulo.id_curso INNER JOIN AU_Professor ON AU_Professor.id_professor = AU_Curso.id_professor order by AU_Modulo.id_modulo "
 set rs = conn.execute(sql)
 
 %>
@@ -29,6 +29,7 @@ function Excluir(cod)
       <tr>
         <th>#</th>
         <th>Módulo</th>
+        <th>Curso</th>
         <th>Texto</th>
         <th>Anexo</th>
         <th>#</th>		
@@ -45,6 +46,7 @@ do while not rs.eof%>
         </a>		
 		</td>
         <td><%=rs("NomeModulo")%></td>
+        <td><%=rs("NomeCurso")%></td>
         <td><%=rs("Texto")%></td>
         <td><%=rs("anexo")%></td>
         <td>

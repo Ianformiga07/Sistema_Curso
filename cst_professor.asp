@@ -37,7 +37,7 @@ function Excluir(cod)
     </thead>
     <tbody>
 <%
-'AQUI COMEÇA O DO WHILE ONDE TRARÁ AS LINHAS DE ACORDO COM O SELECT FEITO
+
 do while not rs.eof%>
       <tr>
         <td>
@@ -57,7 +57,7 @@ do while not rs.eof%>
 
       </tr>
 <%
-'LOOP DEPOIS DA LINHA PARA QUE SE REPITA ENQUANTO TIVER REGISTROS NO SELECT FEITO
+
 rs.movenext
 loop
 call fechaConexao
