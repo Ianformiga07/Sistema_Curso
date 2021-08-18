@@ -24,15 +24,16 @@ BuildUploadRequest RequestBin
 
 'RECEBENDO DADOS DOS FORMULÁRIOS
 'opc          =  UploadRequest.Item("opc").Item("Value")
-response.write(UploadRequest.Item("hfcod").Item("Value"))
-response.end
+
 
 cod          =  UploadRequest.Item("hfcod").Item("Value")
-botao        =  UploadRequest.Item("botao").Item("Value")
 Curso        =  UploadRequest.Item("Curso").Item("Value")
 Texto        =  UploadRequest.Item("Texto").Item("Value")
-arquivo      =  UploadRequest.Item("Anexo").Item("Value")
+arquivo      =  UploadRequest.Item("arquivo").Item("Value")
 nomeModulo   =  UploadRequest.Item("nomeModulo").Item("Value")
+botao        =  UploadRequest.Item("Botao").Item("Value")
+
+
 '
 'Laço que efetua toda operacao do anexo.
 '
@@ -71,15 +72,14 @@ if botao = "Incluir" then
 
    call abreConexao
    sql = "insert into AU_Modulo(descricao, id_curso, Texto, Anexo)"
-   sql = sql & " values('"&nomeModulo&"', '"&Curso&"', '"&Texto&"','"&Anexo&"')"
-   response.write sql
-   response.end
+   sql = sql & " values('"&nomeModulo&"', '"&Curso&"', '"&Texto&"','"&arquivo&"')"
+
    conn.execute(sql)
    call fechaConexao
 %>
 <script>
     alert("Dados incluído com sucesso!")
-    parent.location = "cst_modulo.asp"
+    parent.location = "cst_modulo_up.asp"
 </script>
 <%
 
@@ -90,14 +90,14 @@ call abreConexao
   sql = sql & " descricao = '"&nomeModulo&"',"
   sql = sql & " id_curso = '"&Curso&"',"
   sql = sql & " Texto = '"&Texto&"',"
-  sql = sql & " Anexo = '"&Anexo&"'"
+  sql = sql & " Anexo = '"&arquivo&"'"
   sql = sql & " where id_modulo = "&cod
   conn.execute(sql)
   call fechaConexao
 %>
 <script>
     alert("Dados alterado com sucesso!")
-    parent.location = "cst_modulo.asp"
+    parent.location = "cst_modulo_up.asp"
 </script>
 <%
 
@@ -112,7 +112,7 @@ elseif opc <> "" then
 %>
 <script>
     alert("Linha excluída com sucesso!")
-    parent.location = "cst_modulo.asp"
+    parent.location = "cst_modulo_up.asp"
 </script>
 <%
 end if
