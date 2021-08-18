@@ -11,7 +11,7 @@ function Excluir(cod)
    {
 	 if(confirm("Confirma exclusão?"))
 	  {
-	    parent.location = "manu_modulo_up.asp?opc=exc&cod=" + cod ;
+	    parent.location = "manu_modulo.asp?opc=exc&cod=" + cod ;
       }
    
    } 
@@ -19,7 +19,7 @@ function Excluir(cod)
  </script>
 
 <div class="container">
-<form action="frm_modulo_up.asp" method=post>
+<form action="frm_modulo.asp" method=post>
 <button type="submit" class="btn btn-primary">Adicionar</button>
 
   <h4>Cursos</h4>
@@ -41,7 +41,7 @@ function Excluir(cod)
 do while not rs.eof%>
       <tr>
         <td>
- <a href="frm_modulo_up.asp?evt=alt&cod=<%=rs("id_modulo")%>">
+ <a href="frm_modulo.asp?evt=alt&cod=<%=rs("id_modulo")%>">
  <img src="imagens/alt.png" width="30">
         </a>		
 		</td>

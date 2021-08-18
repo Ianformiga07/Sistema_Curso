@@ -3,6 +3,8 @@
 <!--#include file="FuncaoUpload.asp"-->
 <!--#include file ="lib/Conexao.asp"-->
 <%
+
+
 Function ZerosEsquerda(Num,tam)
 	Dim Zero
 	Num = Trim(Num)
@@ -19,18 +21,18 @@ RequestBin = Request.BinaryRead(byteCount)
 Set UploadRequest = CreateObject("Scripting.Dictionary")
 BuildUploadRequest RequestBin
 
+
 'RECEBENDO DADOS DOS FORMULÁRIOS
+'opc          =  UploadRequest.Item("opc").Item("Value")
+response.write(UploadRequest.Item("hfcod").Item("Value"))
+response.end
 
 cod          =  UploadRequest.Item("hfcod").Item("Value")
-opc          =  UploadRequest.Item("opc").Item("Value")
 botao        =  UploadRequest.Item("botao").Item("Value")
-nomeModulo   =  UploadRequest.Item("nomeModulo").Item("Value")
 Curso        =  UploadRequest.Item("Curso").Item("Value")
 Texto        =  UploadRequest.Item("Texto").Item("Value")
-Anexo        =  UploadRequest.Item("Anexo").Item("Value")
-
-
-
+arquivo      =  UploadRequest.Item("Anexo").Item("Value")
+nomeModulo   =  UploadRequest.Item("nomeModulo").Item("Value")
 '
 'Laço que efetua toda operacao do anexo.
 '
@@ -70,6 +72,8 @@ if botao = "Incluir" then
    call abreConexao
    sql = "insert into AU_Modulo(descricao, id_curso, Texto, Anexo)"
    sql = sql & " values('"&nomeModulo&"', '"&Curso&"', '"&Texto&"','"&Anexo&"')"
+   response.write sql
+   response.end
    conn.execute(sql)
    call fechaConexao
 %>

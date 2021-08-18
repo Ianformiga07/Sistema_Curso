@@ -29,7 +29,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="cst_professor.asp">Professor</a>
           <a class="dropdown-item" href="cst_curso.asp">Curso</a>
-          <a class="dropdown-item" href="cst_modulo.asp">Módulo</a>          
+          <a class="dropdown-item" href="cst_modulo_up.asp">Módulo</a>          
           <a class="dropdown-item" href="upload.asp">Upload Exemplo</a>                    
           <a class="dropdown-item" href="cst_modulo_up.asp">Módulo Upload</a>                    
 
