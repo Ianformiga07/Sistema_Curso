@@ -16,7 +16,7 @@ if ucase(evt) = "ALT" then
    set rs = conn.execute(sql)
 nomeModulo    =  rs("descricao")
 Texto        =  rs("Texto")
-arquivo        =  rs("Anexo")
+Anexo        =  rs("Anexo")
 curso        =  rs("id_curso")
 
    bot        = "Alterar"
@@ -62,9 +62,9 @@ call fechaConexao
       </div>
     </div>
       <div class="form-group">
-      <label class="control-label col-sm-2" for="arquivo"><b>Anexo:</b></label>
+      <label class="control-label col-sm-2" for="Anexo"><b>Anexo:</b></label>
       <div class="col-sm-4">
-        <input type="file" class="form-control" id="arquivo" name="arquivo">
+        <input type="file" class="form-control" id="Anexo" name="Anexo">
       </div>
     </div>
     <div class="form-group">        

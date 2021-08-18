@@ -1,8 +1,10 @@
 <br>
 
-<!--#include file="FuncaoUpload.asp"-->
-<!--#include file ="lib/Conexao.asp"-->
+<!--#include file="../FuncaoUpload.asp"-->
+<!--#include file ="../lib/Conexao.asp"-->
 <%
+
+
 Function ZerosEsquerda(Num,tam)
 	Dim Zero
 	Num = Trim(Num)
@@ -19,29 +21,29 @@ RequestBin = Request.BinaryRead(byteCount)
 Set UploadRequest = CreateObject("Scripting.Dictionary")
 BuildUploadRequest RequestBin
 
+
 'RECEBENDO DADOS DOS FORMULÁRIOS
+'opc          =  UploadRequest.Item("opc").Item("Value")
 
-'opc          = request.querystring("opc")
-response.write(UploadRequest.Item("Anexo").Item("Value"))
-response.end
 
-cod           = UploadRequest.Item("hfcod").Item("Value")
-botao         = UploadRequest.Item("Botao").Item("Value")
-nomeModulo    = UploadRequest.Item("nomeModulo").Item("Value")
-Curso         = UploadRequest.Item("Curso").Item("Value")
-Texto         = UploadRequest.Item("Texto").Item("Value")
-Anexo         = UploadRequest.Item("Anexo").Item("Value")
+cod          =  UploadRequest.Item("hfcod").Item("Value")
+Curso        =  UploadRequest.Item("Curso").Item("Value")
+Texto        =  UploadRequest.Item("Texto").Item("Value")
+arquivo      =  UploadRequest.Item("arquivo").Item("Value")
+nomeModulo   =  UploadRequest.Item("nomeModulo").Item("Value")
+botao        =  UploadRequest.Item("Botao").Item("Value")
+
 
 '
 'Laço que efetua toda operacao do anexo.
 '
 	' Recuperando os Dados Digitados ----------------------
 
-	caminho     = UploadRequest.Item("Anexo").Item("FileName")
+	caminho     = UploadRequest.Item("arquivo").Item("FileName")
 	nome        =  Right(caminho,Len(caminho)-InstrRev(caminho,"\"))
-	Anexo     = UploadRequest.Item("Anexo").Item("Value")
+	arquivo     = UploadRequest.Item("arquivo").Item("Value")
 'TESTANDO SE FOI SELECIONADO ALGUM ARQUIVO E 
-	if trim(Anexo) <> "" then
+	if trim(arquivo) <> "" then
         pasta = Server.MapPath("upload/")
         arq = year(date)&month(date)&day(date)&hour(now)&minute(now)&second(now)&"."&right(nome,3)
 
@@ -52,27 +54,25 @@ Anexo         = UploadRequest.Item("Anexo").Item("Value")
 			arquivo = arq
 			
 		else
-			Anexo = Anexo & "§" & arq
+			arquivo = arquivo & "§" & arq
 		end if
 		Set ScriptObject = Server.CreateObject("Scripting.FileSystemObject")
 		Set MyFile = ScriptObject.CreateTextFile(pasta & nome_arquivo)
 		'Response.Write x & "-"& nome_arquivo & "<br>"
-		For i = 1 to LenB(Anexo)
-		MyFile.Write chr(AscB(MidB(Anexo,i,1)))
+		For i = 1 to LenB(arquivo)
+		MyFile.Write chr(AscB(MidB(arquivo,i,1)))
 		Next
 		MyFile.Close
-		Anexo = ""
+		arquivo = ""
 	end if
 
 session.LCID = 1046
-
-
 
 if botao = "Incluir" then
 
    call abreConexao
    sql = "insert into AU_Modulo(descricao, id_curso, Texto, Anexo)"
-   sql = sql & " values('"&nomeModulo&"', '"&Curso&"', '"&Texto&"','"&Anexo&"')"
+   sql = sql & " values('"&nomeModulo&"', '"&Curso&"', '"&Texto&"','"&arquivo&"')"
 
    conn.execute(sql)
    call fechaConexao
@@ -90,10 +90,8 @@ call abreConexao
   sql = sql & " descricao = '"&nomeModulo&"',"
   sql = sql & " id_curso = '"&Curso&"',"
   sql = sql & " Texto = '"&Texto&"',"
-  sql = sql & " Anexo = '"&Anexo&"'"
+  sql = sql & " Anexo = '"&arquivo&"'"
   sql = sql & " where id_modulo = "&cod
-     response.write sql
-   response.end
   conn.execute(sql)
   call fechaConexao
 %>
