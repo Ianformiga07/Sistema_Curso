@@ -15,9 +15,10 @@ if ucase(evt) = "ALT" then
 
    set rs = conn.execute(sql)
 nomeModulo    =  rs("descricao")
-Texto        =  rs("Texto")
-Anexo        =  rs("Anexo")
-curso        =  rs("id_curso")
+Texto         =  rs("Texto")
+anexo         =  rs("anexo")
+statusUsuario =  rs("status")
+curso         =  rs("id_curso")
 
    bot        = "Alterar"
 else
@@ -61,11 +62,27 @@ call fechaConexao
         <input type="text" class="form-control" id="Texto" name="Texto" value="<%=Texto%>">
       </div>
     </div>
+    <%if evt <> "alt" then%>
       <div class="form-group">
-      <label class="control-label col-sm-2" for="Anexo"><b>Anexo:</b></label>
+      <label class="control-label col-sm-2" for="anexo"><b>Anexo:</b></label>
       <div class="col-sm-4">
-        <input type="file" class="form-control" id="Anexo" name="Anexo">
+        <input type="file" class="form-control" id="anexo" name="anexo">
       </div>
+      <%end if%>
+      
+           <%IF EXISTE = 1 THEN%>
+       <div class="form-group">
+      <label class="control-label col-sm-2" for="status"><b>Status:</b></label>
+      <div class="col-sm-4">
+  <div class="col-3">
+<select name="status" id="status" class="select2-single form-control col-form-label-sm">
+<option value="1" <%if statusUsuario = true then%> selected <%end if%>> Ativo </option>
+<option value="0" <%if statusUsuario = false then%> selected <%end if%>> Inativo </option>
+</select>
+
+      </div>
+    </div>
+      <%END IF%>
     </div>
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">

@@ -2,7 +2,7 @@
 <!--#include file ="lib/Conexao.asp"-->
 <%
 call abreConexao
-sql = "select AU_Modulo.id_modulo, AU_Modulo.descricao AS NomeModulo, AU_Curso.descricao as NomeCurso, AU_Modulo.Texto, AU_Modulo.anexo from AU_Modulo INNER JOIN AU_Curso ON AU_Curso.id_Curso = AU_Modulo.id_curso INNER JOIN AU_Professor ON AU_Professor.id_professor = AU_Curso.id_professor order by AU_Modulo.id_modulo "
+sql = "select AU_Modulo.id_modulo, AU_Modulo.descricao AS NomeModulo, AU_Curso.descricao as NomeCurso, AU_Modulo.Texto, AU_Modulo.anexo, AU_Modulo.status as statusUsuario from AU_Modulo INNER JOIN AU_Curso ON AU_Curso.id_Curso = AU_Modulo.id_curso order by AU_Modulo.id_modulo "
 set rs = conn.execute(sql)
 
 %>
@@ -11,9 +11,8 @@ function Excluir(cod)
    {
 	 if(confirm("Confirma exclusão?"))
 	  {
-	    parent.location = "manu_modulo_up.asp?opc=exc&cod=" + cod ;
+	    parent.location = "manu_modulo_up.asp?opc=exc&cod="+cod ;
       }
-   
    } 
  	
  </script>
@@ -32,7 +31,7 @@ function Excluir(cod)
         <th>Curso</th>
         <th>Texto</th>
         <th>Anexo</th>
-        <th>#</th>		
+        <th>Status</th>		
       </tr>
     </thead>
     <tbody>
@@ -49,10 +48,11 @@ do while not rs.eof%>
         <td><%=rs("NomeCurso")%></td>
         <td><%=rs("Texto")%></td>
         <td><a href="Upload/<%=rs("anexo")%>"><%=rs("anexo")%></a></td>
-        <td>
- <a href="javascript:Excluir(<%=rs("id_modulo")%>)">
- <img src="imagens/excluir.png" width="30">
-        </a>		
+        <td><%IF rs("statusUsuario") = TRUE THEN%>
+                          <font color="#009933"> ATIVO </font>
+                          <%ELSE%>
+  						  <font color="#FF0000"> INATIVO </font>
+                          <%end if%>		
 		</td>
 
       </tr>
