@@ -48,7 +48,7 @@ do while not rs.eof%>
         <td><%=rs("NomeCurso")%></td>
         <td><%=rs("Texto")%></td>
         <td><a href="Upload/<%=rs("anexo")%>"><%=rs("anexo")%></a></td>
-        <td><%IF rs("statusUsuario") = TRUE THEN%>
+          <td><%IF rs("statusUsuario") = TRUE THEN%>
                           <font color="#009933"> ATIVO </font>
                           <%ELSE%>
   						  <font color="#FF0000"> INATIVO </font>

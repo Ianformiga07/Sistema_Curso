@@ -3,9 +3,8 @@
 <!--#include file="FuncaoUpload.asp"-->
 <!--#include file ="lib/Conexao.asp"-->
 <%
-response.write(request("frm_Modulo"))
-response.end
-cod = request.querystring("cod")
+
+'cod = request.querystring("cod")
 Function ZerosEsquerda(Num,tam)
 	Dim Zero
 	Num = Trim(Num)
@@ -22,18 +21,18 @@ Set UploadRequest = CreateObject("Scripting.Dictionary")
 BuildUploadRequest RequestBin
 
 'RECEBENDO DADOS DOS FORMULÁRIOS
-			'response.write(UploadRequest.Item("status").Item("Value"))
+			'response.write(UploadRequest.Item("hfcod").Item("Value"))
 			'response.end
 
 'cod          = UploadRequest.Item("hfcod").Item("Value")
- opc          = request.querystring("opc")
+ opc           = request.querystring("opc")
  cod           = UploadRequest.Item("hfcod").Item("Value")
  botao         = UploadRequest.Item("Botao").Item("Value")
  nomeModulo    = UploadRequest.Item("nomeModulo").Item("Value")
  Curso         = UploadRequest.Item("Curso").Item("Value")
  Texto         = UploadRequest.Item("Texto").Item("Value")
  anexo         = UploadRequest.Item("anexo").Item("Value")
- 'statusUsuario = UploadRequest.Item("statusUsuario").Item("Value")
+ statusUsuario = UploadRequest.Item("status").Item("Value")
 
 '
 'Laço que efetua toda operacao do anexo.
@@ -78,8 +77,8 @@ if botao = "Incluir" then
    call abreConexao
    sql = "insert into AU_Modulo(descricao, id_curso, Texto, anexo, status)"
    sql = sql & " values('"&nomeModulo&"', '"&Curso&"', '"&Texto&"','"&arq&"', '"&statusUsuario&"')"
-	response.write sql
-	response.end
+	'response.write sql
+	'response.end
     conn.execute(sql)
    call fechaConexao
 %>
@@ -91,7 +90,7 @@ if botao = "Incluir" then
 
 elseif botao = "Alterar" then
 
-call abreConexao
+ call abreConexao
   sql = "update AU_Modulo set"
   sql = sql & " descricao = '"&nomeModulo&"',"
   sql = sql & " id_curso = '"&Curso&"',"
