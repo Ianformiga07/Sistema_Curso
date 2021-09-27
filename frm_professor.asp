@@ -2,6 +2,12 @@
 <!--#include file ="lib/Conexao.asp"--> 
 
 <%
+if Session("CPF_Usu") = "" then
+response.Write("<script>")
+response.Write("alert('O Usuário não está logado!');")
+response.Write("window.location.assign('login.asp')")
+response.Write("</script>")
+end if
 
 cod = Request.QueryString("cod")
 evt  = Request.QueryString("evt")

@@ -1,6 +1,13 @@
 <!--#include file="topo.asp"-->  
 <!--#include file ="lib/Conexao.asp"-->
 <%
+if Session("CPF_Usu") = "" then
+response.Write("<script>")
+response.Write("alert('O Usuário não está logado!');")
+response.Write("window.location.assign('login.asp')")
+response.Write("</script>")
+end if
+
 call abreConexao
 sql = "SELECT AU_Curso.id_Curso, AU_Curso.descricao, AU_Professor.Nome as Nome_Professor, AU_Curso.resumo, AU_Curso.ativo from AU_Professor INNER JOIN AU_Curso on AU_Curso.id_professor = AU_Professor.id_professor order by AU_Curso.id_Curso "
 set rs = conn.execute(sql)

@@ -1,21 +1,18 @@
 <!--#include file="topo.asp"-->  
 <!--#include file ="lib/Conexao.asp"-->
 <%
+if Session("CPF_Usu") = "" then
+response.Write("<script>")
+response.Write("alert('O Usuário não está logado!');")
+response.Write("window.location.assign('login.asp')")
+response.Write("</script>")
+end if
+
 call abreConexao
-sql = "select AU_Modulo.id_modulo, AU_Modulo.descricao AS NomeModulo, AU_Curso.descricao as NomeCurso, AU_Modulo.Texto, AU_Modulo.anexo, AU_Modulo.status as statusUsuario from AU_Modulo INNER JOIN AU_Curso ON AU_Curso.id_Curso = AU_Modulo.id_curso order by AU_Modulo.id_modulo "
+sql = "select AU_Modulo.id_modulo, AU_Modulo.descricao AS NomeModulo, AU_Curso.descricao as NomeCurso, AU_Modulo.Texto, AU_Modulo.anexo, AU_Modulo.status as statusUsuario from AU_Modulo INNER JOIN AU_Curso ON AU_Curso.id_Curso = AU_Modulo.id_curso WHERE AU_Modulo.status = 1 order by AU_Modulo.id_modulo"
 set rs = conn.execute(sql)
 
 %>
-  <script>
-function Excluir(cod)
-   {
-	 if(confirm("Confirma exclusão?"))
-	  {
-	    parent.location = "manu_modulo_up.asp?opc=exc&cod="+cod ;
-      }
-   } 
- 	
- </script>
 
 <div class="container">
 <form action="frm_modulo_up.asp" method=post>

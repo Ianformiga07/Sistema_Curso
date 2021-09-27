@@ -1,23 +1,39 @@
 <!--#include file="topo.asp"-->  
-<!--#include file="wpg_cnx.asp"-->  
+<!--#include file ="lib/Conexao.asp"--> 
 <br><br>
-<div class="alert alert-primary" role="alert">
-  Olá Alisson, <br>seja bem-vindo ao Curso de Desenvolvimento Web
-</div>
+<%
+if Session("CPF_Usu") = "" then
+response.Write("<script>")
+response.Write("alert('O Usuário não está logado!');")
+response.Write("window.location.assign('login.asp')")
+response.Write("</script>")
+end if
 
+
+call abreConexao
+sql = "select * from AU_Login where CPF = "&Session("CPF_Usu")&""
+set rs = conn.execute(sql)
+
+%>
+<div class="alert alert-primary" role="alert">
+  Olá <%=rs("NomeCompleto")%>, <br>seja bem-vindo ao Gerenciador de Cursos...
+</div>
+<%
+call fechaConexao
+%>
 <br><br>
 <%
 ' TESTANDO SE EXISTE MENSAGEM NA TABELA DE CONTATO
-
-sql = "select * from tb_contato order by cd_contato "
-set rs = conexao.execute(sql)
+call abreConexao
+sql = "select * from AU_Contato order by idCliente "
+set rs = conn.execute(sql)
 
 if not rs.eof then
 %>
 <div class="alert alert-primary" role="alert">
   Nova(s) Mensagem(s)<br>
 <%do while not rs.eof%>  
- <%=rs("nome")%> - <%=rs("assunto")%><br>
+ <%=rs("NomeCliente")%> - <%=rs("Assunto")%><br>
 <%rs.movenext
 loop%>
 </div>
@@ -25,7 +41,7 @@ loop%>
 <%
 
 end if
-
+call fechaConexao
 %>
 
 </body>

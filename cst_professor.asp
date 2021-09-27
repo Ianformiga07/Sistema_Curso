@@ -1,6 +1,13 @@
 <!--#include file="topo.asp"-->  
 <!--#include file ="lib/Conexao.asp"-->
 <%
+if Session("CPF_Usu") = "" then
+response.Write("<script>")
+response.Write("alert('O Usuário não está logado!');")
+response.Write("window.location.assign('login.asp')")
+response.Write("</script>")
+end if
+
 call abreConexao
 sql = "select * from AU_Professor order by Nome "
 set rs = conn.execute(sql)

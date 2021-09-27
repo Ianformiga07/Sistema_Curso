@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<%
+if Session("CPF_Usu") = "" then
+response.Write("<script>")
+response.Write("alert('O Usuário não está logado!');")
+response.Write("window.location.assign('login.asp')")
+response.Write("</script>")
+end if
+
+%>
 <head>
   <titleDesenvolvimento Web</title>
   <meta charset="windows-1252">
@@ -39,6 +48,6 @@
     </ul>
 
 
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar  </button>
+      <a class="nav-link" href="logout.asp">Sair <span class="sr-only">(página atual)</span></a>
   </div>
 </nav>
